@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <h2>Login Status: {{login_status}}</h2>
+    {{#if login_status}}
+        <form method="POST" action="/auth/logout">
+            <input type="submit" name="logout_button" value="Logout">
+        </form>
+    {{else}}
+        <form method="POST" action="/auth/login">
+            <input type="submit" name="login_button" value="Login">
+        </form>
+    {{/if}}
+  </body>
+</html>
