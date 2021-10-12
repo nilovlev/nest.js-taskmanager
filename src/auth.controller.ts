@@ -1,37 +1,30 @@
-import { Controller, Get, Post, Render, Session } from "@nestjs/common";
-import session from "express-session";
+import { Body, Controller, Get, Post, Render, Res, Session } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { Response } from 'express';
 
-@Controller('/auth')
+
+@Controller('')
 export class AuthController {
-    constructor() {}
+    constructor(private authService: AuthService) {}
 
     @Get('/')
-    @Render('login')
-    auth(@Session() session: Record<string, any>) {
-        if (session.isLogin == null) {
-            session.isLogin = false;
-        }
-        return {login_status: session.isLogin};
+    @Render('/login')
+    auth() {
+
     }
 
-    @Post('/login')
+    @Post('login')
     @Render('login')
-    login(@Session() session: Record<string, any>) {
-        if (session.isLogin == null) {
-            session.isLogin = false;
-        }
-        session.isLogin = true
-        return {login_status: session.isLogin};
+    login(@Res() res: Response, @Session() session: Record<string, any>, @Body() body: any) {
+        session.userName = this.authService.login(body).login
+        return res.redirect('/task_manager');
     }
 
     @Post('/logout')
     @Render('login')
     logout(@Session() session: Record<string, any>) {
-        if (session.isLogin == null) {
-            session.isLogin = false;
-        }
-        session.isLogin = false
-        return {login_status: session.isLogin};
+        session.userName = undefined
+        return {userName: session.userName};
     }
 
 }

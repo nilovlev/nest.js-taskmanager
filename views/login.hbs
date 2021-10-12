@@ -5,14 +5,16 @@
     <title>App</title>
   </head>
   <body>
-    <h1>Login</h1>
-    <h2>Login Status: {{login_status}}</h2>
-    {{#if login_status}}
-        <form method="POST" action="/auth/logout">
+    {{#if loginStatus}}
+        <form method="POST" action="/logout">
+            <h1>User: {{userName}}</h1>
             <input type="submit" name="logout_button" value="Logout">
         </form>
+        {{> taskmanager }}
     {{else}}
-        <form method="POST" action="/auth/login">
+        <h1>Login</h1>
+        <form method="POST" action="/login">
+            <input type="text" name="login_field">
             <input type="submit" name="login_button" value="Login">
         </form>
     {{/if}}

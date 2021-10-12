@@ -13,24 +13,11 @@ export class AppController {
   ) {}
 
   @Get()
-  @Render('index')
+  @Render('login')
   root() {
-    return { 
-      message: 'Hello world!',
-      counter: this.counterService.counter 
-    };
-  }
-
-  @Post('/')
-  add_task(@Res() res: Response, @Body() body: any) {
-    this.taskManagerService.request(body)
-      return res.render(
-      'index',
-      { 
-        message: body.input_task,
-        tasks: this.taskManagerService.task_list
-      }
-    )
+    // return { 
+    //   message: 'Hello world!',
+    // };
   }
   
 }

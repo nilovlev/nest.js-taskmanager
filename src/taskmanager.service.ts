@@ -1,27 +1,36 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Session } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+
+export interface Task {
+    name: string
+    isDone: boolean
+}
 
 @Injectable()
 export class TaskManagerService {
-    task_list = []
+    constructor(private authService: AuthService) {}
 
-    add_task(task: string) {
-        this.task_list.push(task)
+    get_task_list(userName: string): Array<Task> {
+        return this.authService.get_user_by_login(userName).taskList;
     }
 
-    delete_task(task_number: number) {
-        this.task_list.splice(task_number, 1)
-    }
-
-    request(body: any) {
-        if (body.input_task != undefined && body.input_task != '') {
-            this.add_task(body.input_task)
-        } else if (body.task != undefined){
-            Object.keys(body).forEach(element => {
-                if (element != 'task') {
-                    this.delete_task(+element)
-                }
-            });
+    add_task(body: any, userName: string): Array<Task> {
+        let taskList = this.authService.get_user_by_login(userName).taskList
+        if (body.input_task == '') {
+            return taskList;
         }
-        return this.task_list
+        let new_task: Task = { 
+            name: body.input_task,
+            isDone: false
+        }
+        taskList.push(new_task)
+        return taskList;
     }
+
+    delete_task(body: any, userName: string) {
+        let taskList = this.authService.get_user_by_login(userName).taskList
+        taskList.splice(body.task_number, 1)
+        return taskList
+    }
+
 }
