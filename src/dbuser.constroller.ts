@@ -1,5 +1,4 @@
 import { Controller, Get, Session, Render, Post, Body, Redirect } from "@nestjs/common";
-import session from "express-session";
 import { PrismaService } from "./prisma.service";
 
 @Controller('/User')
