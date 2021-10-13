@@ -4,13 +4,15 @@ import { AppService } from './app.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { CounterService } from './counter.service';
+import { DbUserController } from './dbuser.constroller';
+import { PrismaService } from './prisma.service';
 import { TaskManagerController } from './taskmanager.controller';
 import { TaskManagerService } from './taskmanager.service';
 import { TestController } from './test.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, TestController, AuthController, TaskManagerController],
-  providers: [AppService, CounterService, TaskManagerService, AuthService],
+  controllers: [AppController, TestController, AuthController, TaskManagerController, DbUserController],
+  providers: [AppService, CounterService, TaskManagerService, AuthService, PrismaService],
 })
 export class AppModule {}

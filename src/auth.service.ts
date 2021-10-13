@@ -14,7 +14,7 @@ export class AuthService {
 
     login(@Body() body: any): User{
         let input_user_name = body.login_field;
-        let user = this.users.find(user => user.login == input_user_name)
+        let user = this.get_user_by_login(input_user_name);
         if (user != undefined) {
             return user;
         } else {

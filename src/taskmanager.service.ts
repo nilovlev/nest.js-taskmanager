@@ -1,4 +1,4 @@
-import { Injectable, Session } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 
 export interface Task {

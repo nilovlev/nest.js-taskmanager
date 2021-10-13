@@ -16,7 +16,7 @@ export class AuthController {
     @Post('login')
     @Render('login')
     login(@Res() res: Response, @Session() session: Record<string, any>, @Body() body: any) {
-        session.userName = this.authService.login(body).login
+        session.userName = this.authService.login(body).login;
         return res.redirect('/task_manager');
     }
 

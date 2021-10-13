@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Post, Render, Res } from '@nestjs/common';
+import { Controller, Get, Render} from '@nestjs/common';
 import { AppService } from './app.service';
 import { CounterService } from './counter.service';
-import { Response } from 'express';
 import { TaskManagerService } from './taskmanager.service';
 
 @Controller()
@@ -15,9 +14,7 @@ export class AppController {
   @Get()
   @Render('login')
   root() {
-    // return { 
-    //   message: 'Hello world!',
-    // };
+
   }
   
 }
